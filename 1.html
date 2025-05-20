@@ -170,7 +170,7 @@
     <!-- 顶部LOGO区域 -->
     <header class="p-6 text-center border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
       <div id="company-logo"
-           class="w-64 h-20 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg bg-white flex items-center justify-center">
+           class="w-64 h-20 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-yellow-400 to-red-500 flex items-center justify-center">
         <img src="logo.png" alt="公司Logo" class="max-w-full max-h-full object-contain p-2">
       </div>
       <h1 class="text-2xl md:text-3xl font-bold text-primary mb-1">深圳市中恒沥青工程有限公司</h1>
@@ -264,7 +264,7 @@
     const savedTheme = localStorage.getItem('theme');
 
     // 设置初始主题
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const theme = savedTheme || (prefersDark ? 'dark' ? 'light');
     html.setAttribute('data-theme', theme);
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 
