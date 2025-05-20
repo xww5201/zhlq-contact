@@ -114,14 +114,15 @@
       opacity: 0;
       transform: scale(0.95);
       transition: all 0.8s ease-out;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     #amap.visible {
       opacity: 1;
       transform: scale(1);
-      box-shadow: 0 12px 24px rgba(0, 95, 159, 0.3);
-      border-color: #0077cc;
+      border-color: #e0e0e0;
     }
 
     .info-window-content {
@@ -132,13 +133,26 @@
       font-size: 14px;
     }
 
-    /* 可选：Logo 悬停放大效果 */
+    /* Logo 悬停放大效果 */
     #company-logo img {
       transition: transform 0.3s ease;
     }
 
     #company-logo:hover img {
       transform: scale(1.05);
+    }
+
+    header {
+      transition: background 0.3s ease;
+    }
+
+    #company-logo {
+      background-size: 150%;
+      transition: background-position 0.3s ease;
+    }
+
+    #company-logo:hover {
+      background-position: 100% 100%;
     }
   </style>
 </head>
@@ -168,9 +182,9 @@
         style="transform: translateY(20px);">
 
     <!-- 顶部LOGO区域 -->
-    <header class="p-6 text-center border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+    <header class="p-6 text-center border-b border-gray-200 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 backdrop-blur-sm">
       <div id="company-logo"
-           class="w-64 h-20 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-yellow-400 to-red-500 flex items-center justify-center">
+           class="w-64 h-20 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-primary/80 to-accent/90 flex items-center justify-center">
         <img src="logo.png" alt="公司Logo" class="max-w-full max-h-full object-contain p-2">
       </div>
       <h1 class="text-2xl md:text-3xl font-bold text-primary mb-1">深圳市中恒沥青工程有限公司</h1>
@@ -178,35 +192,36 @@
     </header>
 
     <!-- 联系信息卡片 -->
-    <section class="p-6 space-y-6">
-      <div class="contact-item flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition group">
+    <!-- 联系信息卡片 -->
+    <section class="p-6 space-y-5"> <!-- 调整间距为space-y-5保持均匀 -->
+      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]"> <!-- 添加半透明底纹 -->
         <i class="fas fa-map-marker-alt text-2xl text-primary self-start mt-1"></i>
-        <div>
-          <h3 class="font-semibold text-lg text-gray-800">销售总部：</h3>
-          <p class="text-gray-700">深圳市龙华区观澜街道桂花路348号</p>
+        <div class="flex-1"> <!-- 添加flex-1实现左对齐 -->
+          <h3 class="font-semibold text-lg text-gray-600">销售总部：</h3> <!-- 文字颜色调整为#666 -->
+          <p class="text-gray-600">深圳市龙华区观澜街道桂花路348号</p> <!-- 文字颜色调整为#666 -->
         </div>
       </div>
-
-      <div class="contact-item flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition group">
+    
+      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-phone text-2xl text-primary self-start mt-1"></i>
-        <div>
-          <h3 class="font-semibold text-lg text-gray-800">手机：</h3>
+        <div class="flex-1">
+          <h3 class="font-semibold text-lg text-gray-600">手机：</h3>
           <a href="tel:18129822726" class="text-primary hover:underline">18129822726</a>
         </div>
       </div>
-
-      <div class="contact-item flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition group">
+    
+      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-envelope text-2xl text-primary self-start mt-1"></i>
-        <div>
-          <h3 class="font-semibold text-lg text-gray-800">邮箱：</h3>
+        <div class="flex-1">
+          <h3 class="font-semibold text-lg text-gray-600">邮箱：</h3>
           <a href="mailto:1452792782@qq.com" class="text-primary hover:underline">1452792782@qq.com</a>
         </div>
       </div>
-
-      <div class="contact-item flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition group">
+    
+      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-globe text-2xl text-primary self-start mt-1"></i>
-        <div>
-          <h3 class="font-semibold text-lg text-gray-800">网址：</h3>
+        <div class="flex-1">
+          <h3 class="font-semibold text-lg text-gray-600">网址：</h3>
           <a href="http://www.zhlqjtgs.com" target="_blank" class="text-primary hover:underline">www.zhlqjtgs.com</a>
         </div>
       </div>
@@ -391,3 +406,17 @@
   </script>
 </body>
 </html>
+<style>
+  header {
+    transition: background 0.3s ease; /* 为背景添加过渡动画 */
+  }
+
+  #company-logo {
+    background-size: 150%; /* 增大渐变覆盖范围 */
+    transition: background-position 0.3s ease; /* 添加背景位置过渡 */
+  }
+
+  #company-logo:hover {
+    background-position: 100% 100%; /* 悬停时渐变位置偏移 */
+  }
+</style>
