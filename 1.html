@@ -431,11 +431,12 @@
             font-family: sans-serif;
           `;
           promptBox.innerHTML = `
-            <p style="margin-bottom: 1rem; font-weight: bold;">请复制以下链接</p>
+            <p style="margin-bottom: 0.5rem; font-weight: bold;">请复制以下链接</p>
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 1rem;">复制链接后，请粘贴到浏览器地址栏中打开</p>
             <input type="text" id="custom-prompt-input" readonly value="${url}" 
                    style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.3rem; font-size: 0.9rem;" />
             <button id="custom-prompt-copy" style="background: #005f9f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; cursor: pointer;">
-              复制
+              一键复制
             </button>
           `;
           document.body.appendChild(promptBox);
@@ -445,7 +446,7 @@
             input.select();
             input.setSelectionRange(0, 99999);
             document.execCommand('copy');
-            alert('已复制到剪贴板');
+            alert('已复制到剪贴板，请打开浏览器粘贴查看');
           });
         }
         promptBox.style.display = 'block';
