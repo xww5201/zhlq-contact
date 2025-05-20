@@ -299,6 +299,20 @@
       }
     }
 
+    // 确保按钮在移动端可见
+    document.getElementById('theme-toggle').style.zIndex = 9999;
+  </script>
+
+  <style>
+    /* 强制确保按钮在移动端可见 */
+    #theme-toggle {
+      z-index: 9999;
+      bottom: 20px;
+      right: 20px;
+    }
+  </style>
+
+  <script>
     toggleBtn.addEventListener('click', toggleTheme);
 
     // 页面加载完成后初始化地图（延迟加载）
@@ -381,12 +395,12 @@
           if (isWeChat) {
             alert("请复制下方链接并在高德地图中打开");
 
-            // 使用 Clipboard API 替代 prompt
+            // 修复：使用正确的链接并增强兼容性
             navigator.clipboard.writeText(link).then(() => {
               alert('链接已复制到剪贴板');
             }).catch(err => {
               console.error('复制失败:', err);
-              alert('复制失败，请长按链接手动复制');
+              prompt('请长按复制以下链接', link);
             });
           } else {
             const scheme = `androidamap://viewMap?sourceApplication=appname&poiname=${address}&lat=${lat}&lon=${lng}&dev=0`;
