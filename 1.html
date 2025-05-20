@@ -393,15 +393,8 @@
           const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
 
           if (isWeChat) {
-            alert("请复制下方链接并在高德地图中打开");
-
-            // 修复：使用正确的链接并增强兼容性
-            navigator.clipboard.writeText(link).then(() => {
-              alert('链接已复制到剪贴板');
-            }).catch(err => {
-              console.error('复制失败:', err);
-              prompt('请长按复制以下链接', link);
-            });
+            // 新增：使用自定义提示框替代 prompt
+            showCustomPrompt(link);
           } else {
             const scheme = `androidamap://viewMap?sourceApplication=appname&poiname=${address}&lat=${lat}&lon=${lng}&dev=0`;
             window.location.href = scheme;
@@ -415,6 +408,48 @@
           window.open(link, '_blank');
         }
       });
+
+      // 自定义提示组件
+      function showCustomPrompt(url) {
+        let promptBox = document.getElementById('custom-prompt');
+        if (!promptBox) {
+          promptBox = document.createElement('div');
+          promptBox.id = 'custom-prompt';
+          promptBox.style = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            font-family: sans-serif;
+          `;
+          promptBox.innerHTML = `
+            <p style="margin-bottom: 1rem; font-weight: bold;">请复制以下链接</p>
+            <input type="text" id="custom-prompt-input" readonly value="${url}" 
+                   style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.3rem; font-size: 0.9rem;" />
+            <button id="custom-prompt-copy" style="background: #005f9f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; cursor: pointer;">
+              复制
+            </button>
+          `;
+          document.body.appendChild(promptBox);
+
+          document.getElementById('custom-prompt-copy').addEventListener('click', () => {
+            const input = document.getElementById('custom-prompt-input');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            alert('已复制到剪贴板');
+          });
+        }
+        promptBox.style.display = 'block';
+      }
 
       // 分享按钮事件
       document.getElementById('share-btn').addEventListener('click', () => {
