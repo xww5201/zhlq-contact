@@ -264,7 +264,7 @@
     const savedTheme = localStorage.getItem('theme');
 
     // 设置初始主题
-    const theme = savedTheme || (prefersDark ? 'dark' ? 'light');
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
     html.setAttribute('data-theme', theme);
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 
