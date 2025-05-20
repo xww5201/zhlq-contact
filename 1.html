@@ -6,38 +6,38 @@
   <title>联系我们 - 深圳市中恒沥青工程有限公司</title>
 
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
 
   <!-- Font Awesome 图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <!-- 高德地图 JS API 引入 -->
-  <script src="https://webapi.amap.com/maps?v=2.0&key=fb430e365761ec08ee21647d04994616"></script>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=fb430e365761ec08ee21647d04994616" defer></script>
 
   <!-- 二维码生成库 -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" defer></script>
 
   <style>
     :root {
-      --primary-color: #005f9f;
-      --accent-color: #f37431;
-      --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      --color-primary: #005f9f;
+      --color-accent: #f37431;
+      --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.1);
       --card-bg: rgba(255, 255, 255, 0.08);
       --text-color: #f8f9fa;
-      --bg-gradient-dark: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      --bg-gradient-light: linear-gradient(135deg, #eef2f3, #dce6f1);
+      --gradient-dark: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      --gradient-light: linear-gradient(135deg, #eef2f3, #dce6f1);
     }
 
     [data-theme="dark"] {
       --card-bg: rgba(255, 255, 255, 0.08);
       --text-color: #f8f9fa;
-      --bg-gradient: var(--bg-gradient-dark);
+      --bg-gradient: var(--gradient-dark);
     }
 
     [data-theme="light"] {
       --card-bg: rgba(0, 0, 0, 0.05);
       --text-color: #333;
-      --bg-gradient: var(--bg-gradient-light);
+      --bg-gradient: var(--gradient-light);
     }
 
     body {
@@ -52,7 +52,7 @@
     .glass-card {
       backdrop-filter: blur(10px);
       background: var(--card-bg);
-      box-shadow: var(--hover-shadow);
+      box-shadow: var(--shadow-hover);
     }
 
     .contact-item {
@@ -64,7 +64,7 @@
 
     .contact-item:hover {
       transform: translateY(-4px);
-      box-shadow: var(--hover-shadow);
+      box-shadow: var(--shadow-hover);
       background: rgba(255, 255, 255, 0.1);
     }
 
@@ -129,7 +129,7 @@
       background: white;
       padding: 10px 15px;
       border-radius: 6px;
-      border-left: 4px solid var(--primary-color);
+      border-left: 4px solid var(--color-primary);
       font-size: 14px;
     }
 
@@ -185,23 +185,22 @@
     <header class="p-6 text-center border-b border-gray-200 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 backdrop-blur-sm">
       <div id="company-logo"
            class="w-64 h-20 mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-primary/80 to-accent/90 flex items-center justify-center">
-        <img src="logo.png" alt="公司Logo" class="max-w-full max-h-full object-contain p-2">
+        <img src="logo.png" alt="公司Logo" loading="lazy" class="max-w-full max-h-full object-contain p-2">
       </div>
       <h1 class="text-2xl md:text-3xl font-bold text-primary mb-1">深圳市中恒沥青工程有限公司</h1>
       <p class="text-gray-600">专业沥青工程解决方案提供商</p>
     </header>
 
     <!-- 联系信息卡片 -->
-    <!-- 联系信息卡片 -->
-    <section class="p-6 space-y-5"> <!-- 调整间距为space-y-5保持均匀 -->
-      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]"> <!-- 添加半透明底纹 -->
+    <section class="p-6 space-y-5">
+      <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-map-marker-alt text-2xl text-primary self-start mt-1"></i>
-        <div class="flex-1"> <!-- 添加flex-1实现左对齐 -->
-          <h3 class="font-semibold text-lg text-gray-600">销售总部：</h3> <!-- 文字颜色调整为#666 -->
-          <p class="text-gray-600">深圳市龙华区观澜街道桂花路348号</p> <!-- 文字颜色调整为#666 -->
+        <div class="flex-1">
+          <h3 class="font-semibold text-lg text-gray-600">销售总部：</h3>
+          <p class="text-gray-600">深圳市龙华区观澜街道桂花路348号</p>
         </div>
       </div>
-    
+
       <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-phone text-2xl text-primary self-start mt-1"></i>
         <div class="flex-1">
@@ -209,7 +208,7 @@
           <a href="tel:18129822726" class="text-primary hover:underline">18129822726</a>
         </div>
       </div>
-    
+
       <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-envelope text-2xl text-primary self-start mt-1"></i>
         <div class="flex-1">
@@ -217,7 +216,7 @@
           <a href="mailto:1452792782@qq.com" class="text-primary hover:underline">1452792782@qq.com</a>
         </div>
       </div>
-    
+
       <div class="contact-item flex items-start gap-4 p-4 rounded-lg transition group bg-[rgba(0,0,0,0.03)] hover:bg-[rgba(0,0,0,0.05)]">
         <i class="fas fa-globe text-2xl text-primary self-start mt-1"></i>
         <div class="flex-1">
@@ -232,7 +231,7 @@
       <h2 class="font-bold text-lg text-gray-800 mb-3 flex items-center">
         <i class="fas fa-location-dot mr-2 text-primary"></i>地理位置
       </h2>
-      <div id="amap" class="w-full h-64 md:h-80 rounded-xl shadow-md border border-gray-300 visible"></div>
+      <div id="amap" class="w-full h-64 md:h-80 rounded-xl shadow-md border border-gray-300"></div>
 
       <!-- 地图操作按钮 -->
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
@@ -290,6 +289,14 @@
       html.setAttribute('data-theme', next);
       icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
       localStorage.setItem('theme', next);
+
+      // 实时更新背景渐变
+      const headerEl = document.querySelector('header');
+      if (next === 'dark') {
+        headerEl.style.background = 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)';
+      } else {
+        headerEl.style.background = 'linear-gradient(135deg, #eef2f3, #dce6f1)';
+      }
     }
 
     toggleBtn.addEventListener('click', toggleTheme);
@@ -366,25 +373,32 @@
         const lat = 22.65460533364268;
         const lng = 114.03452831531712;
         const address = encodeURIComponent("深圳市中恒沥青工程有限公司");
+        const link = `https://uri.amap.com/marker?position=${lng},${lat}&name=${address}`;
 
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-          const scheme = `androidamap://viewMap?sourceApplication=appname&poiname=${address}&lat=${lat}&lon=${lng}&dev=0`;
           const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
 
           if (isWeChat) {
             alert("请复制下方链接并在高德地图中打开");
-            const link = `https://uri.amap.com/marker?position=${lng},${lat}&name=${address}`;
-            prompt("请长按复制链接", link);
+
+            // 使用 Clipboard API 替代 prompt
+            navigator.clipboard.writeText(link).then(() => {
+              alert('链接已复制到剪贴板');
+            }).catch(err => {
+              console.error('复制失败:', err);
+              alert('复制失败，请长按链接手动复制');
+            });
           } else {
+            const scheme = `androidamap://viewMap?sourceApplication=appname&poiname=${address}&lat=${lat}&lon=${lng}&dev=0`;
             window.location.href = scheme;
 
             // 备用跳转
             setTimeout(() => {
-              window.open(`https://uri.amap.com/marker?position=${lng},${lat}&name=${address}`, '_blank');
+              window.open(link, '_blank');
             }, 1000);
           }
         } else {
-          window.open(`https://uri.amap.com/marker?position=${lng},${lat}&name=${address}`, '_blank');
+          window.open(link, '_blank');
         }
       });
 
@@ -406,17 +420,3 @@
   </script>
 </body>
 </html>
-<style>
-  header {
-    transition: background 0.3s ease; /* 为背景添加过渡动画 */
-  }
-
-  #company-logo {
-    background-size: 150%; /* 增大渐变覆盖范围 */
-    transition: background-position 0.3s ease; /* 添加背景位置过渡 */
-  }
-
-  #company-logo:hover {
-    background-position: 100% 100%; /* 悬停时渐变位置偏移 */
-  }
-</style>
