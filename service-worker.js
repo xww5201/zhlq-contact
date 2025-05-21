@@ -3,7 +3,7 @@ const urlsToCache = [
   '/1.html', // 如果你使用的不是1.html，请替换为你的HTML文件名
   
   // 可添加其他需要缓存的资源（CSS、JS、图片等）
-  '/背景.png',
+  '/ background.png',
   '/logo.png',
   '/ts.mp3',
 ];
