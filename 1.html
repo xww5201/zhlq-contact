@@ -50,15 +50,14 @@
       font-family: 'Segoe UI', sans-serif;
       line-height: 1.6;
       color: var(--text-color);
-      transition: background 0.3s ease;
-      /* 添加占位背景色 */
-      background-color: #f8f9fa; /* 或其他合适的颜色 */
+      transition: background 0.3s ease, background-color 0.3s ease;
+      background-color: #f8f9fa;
     }
 
     .glass-card {
       backdrop-filter: blur(10px);
       background: var(--card-bg);
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
     }
 
     .contact-item {
@@ -66,11 +65,12 @@
       border-radius: 0.75rem;
       padding: 1rem;
       background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
     }
 
     .contact-item:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       background: rgba(255, 255, 255, 0.1);
     }
 
@@ -117,152 +117,67 @@
     }
 
     #amap {
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.8s ease-out;
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 1.25rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-
-    #amap.visible {
       opacity: 1;
-      transform: scale(1);
-      border-color: #e0e0e0;
+      transition: opacity 0.4s ease-in-out;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
-    .info-window-content {
-      background: white;
-      padding: 10px 15px;
-      border-radius: 6px;
-      border-left: 4px solid var(--color-primary);
-      font-size: 14px;
-    }
-
-    /* Logo 悬停放大效果 */
-    #company-logo img {
-      transition: transform 0.3s ease;
-    }
-
-    #company-logo:hover img {
-      transform: scale(1.05);
-    }
-
-    header {
-      transition: background 0.3s ease;
-    }
-
-    #company-logo {
-      background-size: 150%;
-      transition: background-position 0.3s ease;
-    }
-
-    #company-logo:hover {
-      background-position: 100% 100%;
-    }
-
-    /* 添加地图加载动画 */
-    #amap-loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-top-color: var(--color-primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 1000;
-    }
-
-    /* 优化加载动画效果 */
-    #loading-overlay {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    }
-
-    .animate-spin {
-      border-top-color: var(--color-primary);
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* 修改：优化背景模糊效果 */
     body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('background.png') no-repeat center center fixed;
-      background-size: cover;
       filter: blur(10px);
       z-index: -1;
       transition: filter 0.5s ease-in-out;
     }
 
-    /* 修改：顶部LOGO区域样式优化 */
-    #company-logo {
-      transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+    #theme-toggle {
+      z-index: 9999;
+      bottom: 20px;
+      right: 20px;
     }
 
-    #company-logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 修改：联系信息卡片样式优化 */
-    .contact-item {
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(5px);
-    }
-
-    .contact-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* 修改：地图加载动画优化 */
-    #amap-loading {
-      position: absolute;
+    /* 新增：浮动提示框样式 */
+    #custom-prompt {
+      display: none;
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-top-color: var(--color-primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 1000;
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 9999;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    #custom-prompt input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    #custom-prompt button {
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.3rem;
+      cursor: pointer;
     }
   </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 relative">
-
-  <!-- 页面加载动画 -->
-  <div id="loading-overlay"
-       class="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
-  </div>
+<body class="min-h-screen p-4 md:p-8 relative" style="transition: background 0.3s ease;">
 
   <!-- 主要容器 -->
   <main id="main-container"
-        class="max-w-3xl mx-auto glass-card rounded-2xl overflow-hidden transition-all duration-500 opacity-0"
-        style="transform: translateY(20px);">
-
+        class="max-w-3xl mx-auto glass-card rounded-2xl overflow-hidden transition-all duration-500 opacity-1"
+        style="transform: translateY(0);">
     <!-- 顶部LOGO区域 -->
     <header class="p-6 text-center border-b border-gray-200 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 backdrop-blur-sm">
       <div id="company-logo"
@@ -317,8 +232,7 @@
 
       <!-- 地图操作按钮 -->
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
-        <a href="#"
-           id="open-in-map"
+        <a href="#" id="open-in-map"
            class="btn btn-primary flex items-center justify-center gap-2 px-5 py-2 rounded-lg hover:shadow-lg transition-all duration-300">
           <i class="fas fa-directions text-lg"></i>
           <span>打开导航 App</span>
@@ -342,13 +256,19 @@
   <!-- 浮动查看地图按钮 -->
   <a id="floating-map-btn"
      href="#map-section"
-     class="fixed bottom-20 right-6 bg-primary text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg transform transition-all duration-300 scale-0 opacity-0 pointer-events-none group">
+     class="fixed bottom-20 right-6 bg-primary text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg transform transition-all duration-300 scale-100 opacity-100 pointer-events-auto group">
     <span class="absolute inset-0 bg-primary rounded-full animate-pulse opacity-20"></span>
     <i class="fas fa-map-location-dot text-lg z-10"></i>
     <span class="absolute bottom-16 right-0 bg-primary text-white px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-y-0 group-hover:translate-y-[-4px]">
       查看地图位置
     </span>
   </a>
+
+  <!-- 主题切换按钮 -->
+  <button id="theme-toggle"
+          class="fixed bottom-20 right-6 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-700 transition-all duration-300 z-50">
+    <i id="theme-icon" class="fas fa-sun"></i>
+  </button>
 
   <!-- 注册 Service Worker -->
   <script>
@@ -365,50 +285,12 @@
     }
   </script>
 
-  <style>
-    /* 强制确保按钮在移动端可见 */
-    #theme-toggle {
-      z-index: 9999;
-      bottom: 20px;
-      right: 20px;
-    }
-
-    /* 增强背景模糊效果 */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('background.png') no-repeat center center fixed;
-      background-size: cover;
-      filter: blur(10px);
-      z-index: -1;
-    }
-  </style>
-
   <script>
-    window.addEventListener('load', () => {
-      const loading = document.getElementById('loading-overlay');
-      const main = document.getElementById('main-container');
-
-      setTimeout(() => {
-        loading.style.opacity = '0';
-        loading.style.transform = 'scale(0.95)';
-        setTimeout(() => loading.remove(), 300);
-
-        main.style.opacity = '1';
-        main.style.transform = 'translateY(0)';
-      }, 800);
-
-      // 确保地图容器可见
+    document.addEventListener('DOMContentLoaded', function () {
       const mapContainer = document.getElementById('amap');
-      mapContainer.classList.add('visible');
-
-      // 地图加载动画
       const mapLoading = document.createElement('div');
       mapLoading.id = 'amap-loading';
+      mapLoading.className = 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 border-4 border-gray-200 border-t-primary rounded-full animate-spin';
       mapContainer.appendChild(mapLoading);
 
       const map = new AMap.Map('amap', {
@@ -418,10 +300,7 @@
         mapStyle: 'amap://styles/light'
       });
 
-      // 地图加载完成后移除加载动画
       map.on('complete', () => {
-        mapLoading.style.opacity = '0';
-        mapLoading.style.transform = 'scale(0.95)';
         setTimeout(() => mapLoading.remove(), 300);
       });
 
@@ -435,7 +314,6 @@
         `;
       }
 
-      // 添加标记 + 点击弹窗
       const marker = new AMap.Marker({
         position: new AMap.LngLat(114.03452831531712, 22.65460533364268),
         title: '深圳市中恒沥青工程有限公司',
@@ -479,13 +357,11 @@
           const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
 
           if (isWeChat) {
-            // 新增：使用自定义提示框替代 prompt
             showCustomPrompt(link);
           } else {
             const scheme = `androidamap://viewMap?sourceApplication=appname&poiname=${address}&lat=${lat}&lon=${lng}&dev=0`;
             window.location.href = scheme;
 
-            // 备用跳转
             setTimeout(() => {
               window.open(link, '_blank');
             }, 1000);
@@ -495,36 +371,43 @@
         }
       });
 
-      // 自定义提示组件
+      // 自定义提示组件（带关闭功能）
       function showCustomPrompt(url) {
         let promptBox = document.getElementById('custom-prompt');
         if (!promptBox) {
           promptBox = document.createElement('div');
           promptBox.id = 'custom-prompt';
-          promptBox.style = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            font-family: sans-serif;
-          `;
+          promptBox.style.position = 'fixed';
+          promptBox.style.top = '50%';
+          promptBox.style.left = '50%';
+          promptBox.style.transform = 'translate(-50%, -50%)';
+          promptBox.style.background = '#fff';
+          promptBox.style.padding = '1rem 1.5rem';
+          promptBox.style.borderRadius = '0.5rem';
+          promptBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+          promptBox.style.zIndex = '9999';
+          promptBox.style.width = '80%';
+          promptBox.style.maxWidth = '400px';
+          promptBox.style.textAlign = 'center';
+          promptBox.style.fontFamily = 'sans-serif';
+
           promptBox.innerHTML = `
             <p style="margin-bottom: 0.5rem; font-weight: bold;">请复制以下链接</p>
             <p style="font-size: 0.8rem; color: #666; margin-bottom: 1rem;">复制链接后，请粘贴到浏览器地址栏中打开</p>
-            <input type="text" id="custom-prompt-input" readonly value="${url}" 
+            <input type="text" id="custom-prompt-input" readonly value="${url}"
                    style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 0.3rem; font-size: 0.9rem;" />
-            <button id="custom-prompt-copy" style="background: #005f9f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; cursor: pointer;">
-              一键复制
-            </button>
+            <div style="display: flex; justify-content: center; gap: 1rem;">
+              <button id="custom-prompt-copy"
+                      style="background: #005f9f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; cursor: pointer;">
+                一键复制
+              </button>
+              <button id="custom-prompt-close"
+                      style="background: #e0e0e0; color: #333; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem; cursor: pointer;">
+                关闭
+              </button>
+            </div>
           `;
+
           document.body.appendChild(promptBox);
 
           document.getElementById('custom-prompt-copy').addEventListener('click', () => {
@@ -533,6 +416,10 @@
             input.setSelectionRange(0, 99999);
             document.execCommand('copy');
             alert('已复制到剪贴板，请打开浏览器粘贴查看');
+          });
+
+          document.getElementById('custom-prompt-close').addEventListener('click', () => {
+            promptBox.style.display = 'none'; // 只隐藏，不移除，下次可用
           });
         }
         promptBox.style.display = 'block';
@@ -551,6 +438,36 @@
             canvas.setAttribute('data-generated', 'true');
           });
         }
+      });
+
+      // 主题切换逻辑
+      const toggleBtn = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      const html = document.documentElement;
+
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+      html.setAttribute('data-theme', theme);
+      icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+      function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('theme', theme);
+
+        const headerEl = document.querySelector('header');
+        if (headerEl) {
+          headerEl.style.background = theme === 'dark'
+            ? 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)'
+            : 'linear-gradient(135deg, #eef2f3, #dce6f1)';
+        }
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
       });
     });
   </script>
