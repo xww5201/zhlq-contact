@@ -2,13 +2,24 @@
 <html lang="zh-CN" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>联系我们 - 深圳市中恒沥青工程有限公司</title>
+
+  <!-- 防止FOUC -->
+  <style>
+    html {
+      visibility: hidden;
+    }
+    .loaded html {
+      visibility: visible;
+    }
+  </style>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com" defer></script>
 
-  <!-- Font Awesome 图标库 -->
+  <!-- Font Awesome 图标库 预加载-->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <!-- 高德地图 JS API 引入 -->
@@ -160,7 +171,7 @@
 
   <!-- 页面加载动画 -->
   <div id="loading-overlay"
-       class="fixed inset-0 bg-white flex items-center justify-center z-50">
+       class="fixed inset-0 bg-white flex items-center justify-center z-[9999]">
     <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
   </div>
 
@@ -257,30 +268,21 @@
     </section>
   </main>
 
-  <!-- 浮动查看地图按钮 -->
-  <a id="floating-map-btn"
-     href="#map-section"
-     class="fixed bottom-20 right-6 bg-primary text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg transform transition-all duration-300 scale-0 opacity-0 pointer-events-none group">
-    <span class="absolute inset-0 bg-primary rounded-full animate-pulse opacity-20"></span>
-    <i class="fas fa-map-location-dot text-lg z-10"></i>
-    <span class="absolute bottom-16 right-0 bg-primary text-white px-2 py-1 rounded-md text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-y-0 group-hover:translate-y-[-4px]">
-      查看地图位置
-    </span>
-  </a>
-
-  <!-- 注册 Service Worker -->
+  <!-- 注册 Service Worker 延迟加载 -->
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(registration => {
-            console.log('Service Worker 注册成功，作用域:', registration.scope);
-          })
-          .catch(error => {
-            console.error('Service Worker 注册失败:', error);
-          });
-      });
-    }
+    window.addEventListener('load', () => {
+      if ('serviceWorker' in navigator) {
+        setTimeout(() => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+              console.log('Service Worker 注册成功，作用域:', registration.scope);
+            })
+            .catch(error => {
+              console.error('Service Worker 注册失败:', error);
+            });
+        }, 3000); // 延迟3秒注册
+      }
+    });
   </script>
 
   <script>
@@ -315,7 +317,7 @@
     }
 
     // 确保按钮在移动端可见
-    document.getElementById('theme-toggle').style.zIndex = 9999;
+    document.getElementById('theme-toggle').style.zIndex = '9999';
   </script>
 
   <style>
@@ -328,6 +330,8 @@
   </style>
 
   <script>
+    document.documentElement.classList.add('loaded');
+
     toggleBtn.addEventListener('click', toggleTheme);
 
     // 页面加载完成后初始化地图（延迟加载）
